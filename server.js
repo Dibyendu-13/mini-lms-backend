@@ -9,7 +9,7 @@ const app = express();
 
 // CORS configuration
 const corsOptions = {
-  origin: 'https://mini-lms-ui.netlify.app',  // Frontend URL
+  origin: '*',  // Frontend URL
   methods: 'GET, POST, PUT, DELETE',
   allowedHeaders: 'Content-Type, Authorization',  // Allow headers
   credentials: true,
