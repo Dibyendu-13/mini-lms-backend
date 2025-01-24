@@ -1,6 +1,8 @@
 const multer = require('multer');
+const path = require('path');
+
 const Resource = require('../models/resourceModel');
-const Schedule = require('../models/scheduleModel');
+const { get } = require('http');
 
 // Set up file storage for multer
 const storage = multer.diskStorage({
@@ -27,16 +29,15 @@ const uploadResource = async (req, res) => {
   }
 };
 
-const createSchedule = async (req, res) => {
-  const { title, time } = req.body;
-
+const getResources = async (req, res) => {
   try {
-    const schedule = new Schedule({ title, time, userId: req.userId });
-    await schedule.save();
-    res.status(201).send({ message: 'Schedule created successfully' });
+    const resources = await Resource.find();
+    res.status(200).send({ resources });
   } catch (error) {
     res.status(500).send({ error: 'An error occurred' });
   }
 };
 
-module.exports = { uploadResource, createSchedule, upload };
+
+
+module.exports = { uploadResource, upload,getResources };

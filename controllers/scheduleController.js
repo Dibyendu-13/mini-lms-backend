@@ -1,5 +1,4 @@
 const Schedule = require('../models/scheduleModel');
-const Resource = require('../models/resourceModel');
 
 const getSchedules = async (req, res) => {
   try {
@@ -10,13 +9,18 @@ const getSchedules = async (req, res) => {
   }
 };
 
-const getResources = async (req, res) => {
+
+
+const createSchedule = async (req, res) => {
+  const { title, time } = req.body;
+
   try {
-    const resources = await Resource.find();
-    res.status(200).send({ resources });
+    const schedule = new Schedule({ title, time, userId: req.userId });
+    await schedule.save();
+    res.status(201).send({ message: 'Schedule created successfully' });
   } catch (error) {
     res.status(500).send({ error: 'An error occurred' });
   }
 };
 
-module.exports = { getSchedules, getResources };
+module.exports = {createSchedule, getSchedules };
