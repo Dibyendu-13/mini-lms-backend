@@ -1,4 +1,4 @@
-# Project Name
+# MINI LMS BACKEND
 
 This project provides an API server built using Node.js, Express, and MongoDB, enabling functionalities for user authentication, resource management, and scheduling.
 
